@@ -1,12 +1,12 @@
 # coding=utf-8
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 from django.db import models
 from djangotoolbox.fields import EmbeddedModelField
 
 
-#class User(AbstractUser):
-#    def __str__(self):
-#        return "User"
+class User(AbstractBaseUser):
+    def __str__(self):
+        return "Userasd"
 
 class Note(models.Model):
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
@@ -30,8 +30,3 @@ class CalendarEvent(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(null=True, blank=True)
     location = models.TextField(max_length=300, verbose_name="Miejsce wydarzenia")
-
-
-class Wat(models.Model):
-    a = models.TextField(default=None, null=True)
-    b = models.TextField()

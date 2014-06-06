@@ -2,12 +2,18 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     {% load bootstrap3 %}
     {% bootstrap_css %}
+
+    <!--<link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css" />-->
+    <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css" />
     {% bootstrap_javascript %}
+    {% block custom_js %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-
+{% include "top_menu.html" %}
+{% block content %}{% endblock %}
 </body>
 </html>

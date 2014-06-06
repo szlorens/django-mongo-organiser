@@ -7,7 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', views.index, name='index'),
-    # url(r'^blog/', include('blog.urls')),
+    url(r'^register$', views.register, name='register'),
 
     url(r'^admin/', include(admin.site.urls)),
 )
