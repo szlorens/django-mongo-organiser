@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="76af3a5b-0509-4853-b5f1-c34a9782e485" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/organiser_app/admin.py" afterPath="$PROJECT_DIR$/organiser_app/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/organiser_app/models.py" afterPath="$PROJECT_DIR$/organiser_app/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Organiser/settings.py" afterPath="$PROJECT_DIR$/Organiser/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Organiser/urls.py" afterPath="$PROJECT_DIR$/Organiser/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/organiser_app/views.py" afterPath="$PROJECT_DIR$/organiser_app/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../README.md" afterPath="$PROJECT_DIR$/../README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Organiser.iws" />
@@ -32,15 +26,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Organiser/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3158784" vertical-offset="383" max-vertical-offset="1260">
+            <state vertical-scroll-proportion="0.0" vertical-offset="383" max-vertical-offset="1260">
               <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
               <folding>
                 <element signature="e#320#329#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="567">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
@@ -131,6 +138,7 @@
         <option value="$PROJECT_DIR$/Organiser/urls.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/Organiser/settings.py" />
+        <option value="$PROJECT_DIR$/../README.md" />
       </list>
     </option>
   </component>
@@ -473,7 +481,15 @@
       <created>1402086115063</created>
       <updated>1402086115063</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Created basic views and template stubs">
+      <created>1402090867387</created>
+      <updated>1402090867387</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Readme file update">
+      <created>1402091088722</created>
+      <updated>1402091088722</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -518,7 +534,9 @@
     </option>
     <MESSAGE value="Basic configuration" />
     <MESSAGE value="Model definition" />
-    <option name="LAST_COMMIT_MESSAGE" value="Model definition" />
+    <MESSAGE value="Created basic views and template stubs" />
+    <MESSAGE value="Readme file update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Readme file update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -530,17 +548,6 @@
           <caret line="249" column="8" selection-start-line="249" selection-start-column="8" selection-end-line="249" selection-end-column="8" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.105820104" vertical-offset="0" max-vertical-offset="567">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Organiser/db_settings.py">
@@ -607,12 +614,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Organiser/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3158784" vertical-offset="383" max-vertical-offset="1260">
+        <state vertical-scroll-proportion="0.0" vertical-offset="383" max-vertical-offset="1260">
           <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
           <folding>
             <element signature="e#320#329#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="567">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>
