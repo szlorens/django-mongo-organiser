@@ -1,3 +1,5 @@
 from django.contrib import admin
+from organiser_app.models import CalendarEvent, Contact, Note, AbstractUser
 
-# Register your models here.
+
+admin.site.register(CalendarEvent)
