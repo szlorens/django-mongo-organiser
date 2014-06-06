@@ -49,6 +49,10 @@ coverage.xml
 *.log
 *.pot
 
+# Django db settings:
+Organiser/Organiser/db_settings.py
+
+
 # Sphinx documentation
 docs/_build/
 
