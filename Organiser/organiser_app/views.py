@@ -18,7 +18,7 @@ def index(request):
 
 
 def logout(request):
-    auth_logout()
+    auth_logout(request)
     return index(request)
 
 

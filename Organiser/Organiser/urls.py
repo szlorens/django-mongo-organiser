@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^notes$', views.notes_view, name='notes'),
     url(r'^note/(?P<note_id>[^/]+)$', views.note_view, name='note'),
     #url(r'^note/(?P<note_id>[^/]+)/(?P<action>[^/]+)$', views.note_view, name='note'),
-    url(r'^logout$', views.login_view, name='logout'),
+    url(r'^logout$', views.logout, name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
 )

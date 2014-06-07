@@ -4,7 +4,6 @@
 {% block content %}
     <h1>Twój organizer</h1>
     <hr/>
-    <div class="container">
         <div class="row">
             <div class="col-md-8">
                 <h2><span class="glyphicon glyphicon-file"></span> Ostatnie notatki
@@ -17,9 +16,8 @@
                     {% if notes %}
                         {% for note in notes %}
                             <a href="note/{{ note.id }}" class="list-group-item">
-                                <h4 class="list-group-item-heading">{{ note.title }}</h4>
-
-                                <p class="list-group-item-text">{{ note.content }}</p>
+                                <h4 class="list-group-item-heading">{{ note.title }}<small class="pull-right">{{ note.create_date }}</small></h4>
+                                <p class="list-group-item-text">{{ note.content|truncatewords:30 }}</p>
                             </a>
                         {% endfor %}
                     {% else %}
@@ -37,5 +35,4 @@
                 <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div>
         </div>
-    </div>
 {% endblock %}
