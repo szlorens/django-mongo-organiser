@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     #'mongoengine.django.mongo_auth',
     'bootstrap3',
     'organiser_app',
+	'djangotoolbox',
 )
 
 MIDDLEWARE_CLASSES = (
