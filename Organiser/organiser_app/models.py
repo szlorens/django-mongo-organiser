@@ -41,3 +41,6 @@ class CalendarEvent(models.Model):
     end_date = models.DateTimeField(default=None, null=True, blank=True, verbose_name="Data zakończenia")
     location = models.TextField(max_length=300, verbose_name="Miejsce wydarzenia", default=None, null=True, blank=True)
     author = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return self.author.get_full_name() + " - " + self.title + " [" + str(self.start_date)+ "]"

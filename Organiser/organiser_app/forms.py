@@ -10,7 +10,7 @@ __author__ = 'pawelszymanski'
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ['email', 'first_name','last_name']
+        fields = ['email', 'first_name', 'last_name']
 
 
 class RegisterForm(UserCreationForm):
@@ -31,7 +31,7 @@ class NoteForm(forms.ModelForm):
 class CalendarEventForm(forms.ModelForm):
     class Meta:
         model = CalendarEvent
-        #fields = ['title', 'description', 'start_date', 'end_date', 'location']
+        # fields = ['title', 'description', 'start_date', 'end_date', 'location']
         exclude = ['author']
 
 

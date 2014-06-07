@@ -1,10 +1,15 @@
+from datetime import timedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.utils import timezone
+from django.utils.datetime_safe import datetime
 from django.utils.decorators import method_decorator
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from organiser_app.forms import ProfileForm, NoteForm, RegisterForm, CalendarEventForm
@@ -41,8 +46,8 @@ def login_view(request):
 @login_required()
 def dashboard_view(request):
     user = request.user
-    notes = Note.objects.filter(author=user)
-    events = CalendarEvent.objects.filter(author=user)
+    notes = Note.objects.filter(author=user)[:5].reverse()
+    events = CalendarEvent.objects.filter(Q(start_date__gte=datetime.today()) | Q(start_date__lte=datetime.today() + timedelta(days=7)), author=user).order_by('start_date')[:5]
     return render(request, "organiser_app/dashboard.html", {"notes": notes, "events": events})
 
 
@@ -77,14 +82,14 @@ def note_view(request, note_id):
     note = Note.objects.get(id=note_id)
 
     # if action == "delete":
-    #     note.delete()
+    # note.delete()
     #     return index(request)
     # else:
     return render(request, "organiser_app/note.html", {"note": note})
 
 
 @login_required()
-def myprofile_view(request):
+def MyProfileView(request):
     form = ProfileForm(instance=request.user)
     return render(request, 'organiser_app/myprofile.html', {"form": form})
 
@@ -106,6 +111,7 @@ class LoginRequiredMixin(object):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 
+# Notes classes
 class NoteMixin(LoginRequiredMixin):
     form_class = NoteForm
     model = Note
@@ -117,6 +123,7 @@ class CreateNote(NoteMixin, CreateView):
     def get_initial(self):
         initial = super(CreateNote, self).get_initial()
         initial['author'] = self.request.user
+        initial['create'] = True
         return initial
 
 
@@ -129,7 +136,22 @@ class DeleteNote(NoteMixin, DeleteView):
     success_url = reverse_lazy('notes')
 
 
-class CreateEvent(LoginRequiredMixin, CreateView):
+# Events classes
+class EventMixin(LoginRequiredMixin):
+    # form_class = CalendarEventForm
+    model = CalendarEvent
+    pk_url_kwarg = 'event_id'
+
+
+class ShowEvent(EventMixin, DetailView):
+    template_name = 'organiser_app/event.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShowEvent, self).get_context_data(**kwargs)
+        return context
+
+
+class CreateEvent(EventMixin, CreateView):
     model = CalendarEvent
     form_class = CalendarEventForm
     pk_url_kwarg = 'event_id'
@@ -137,6 +159,7 @@ class CreateEvent(LoginRequiredMixin, CreateView):
     def get_initial(self):
         initial = super(CreateEvent, self).get_initial()
         initial['author'] = self.request.user
+        initial['create'] = True
         return initial
 
 
