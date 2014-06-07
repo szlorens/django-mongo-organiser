@@ -5,16 +5,20 @@ from djangotoolbox.fields import EmbeddedModelField, RawField
 
 
 class User(AbstractUser):
-    #objects = UserManager()
+    # objects = UserManager()
     def __str__(self):
-        return "Userasd"
+        return self.get_full_name() + " [" + self.email + "]"
+
 
 class Note(models.Model):
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
     edit_date = models.DateTimeField(verbose_name="Data edycji", null=True, blank=True, default=None)
     title = models.CharField(verbose_name="Tytuł", max_length=100)
     content = models.TextField(verbose_name="Treść", default=None)
-    author = EmbeddedModelField('User', verbose_name="Autor")
+    author = models.ForeignKey(User)
+
+    def __str__(self):
+        return self.author.get_full_name() + " - " + self.title
 
 
 class Contact(models.Model):

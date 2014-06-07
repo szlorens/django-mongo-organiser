@@ -2,11 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, redirect
-from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateResponseMixin
-from django.views.generic.detail import SingleObjectTemplateResponseMixin
-from django.views.generic.edit import ProcessFormView, FormMixin, CreateView, ModelFormMixin
-from django.forms import models as model_forms
+from django.views.generic.edit import ProcessFormView, ModelFormMixin
 
 from organiser_app.forms import ProfileForm
 
@@ -42,9 +39,8 @@ def login_view(request):
 
 @login_required()
 def dashboard_view(request):
-    user = User.objects.get(pk=request.user.id)
+    user = request.user
     notes = Note.objects.filter(author=user)
-
     return render(request, "dashboard.html", {"notes": notes})
 
 
@@ -74,8 +70,15 @@ def notes_view(request):
 
 
 @login_required()
-def note_view(requst):
-    pass
+def note_view(request, note_id):
+    user = request.user
+    note = Note.objects.get(id=note_id)
+
+    # if action == "delete":
+    #     note.delete()
+    #     return index(request)
+    # else:
+    return render(request, "note.html", {"note": note})
 
 
 @login_required()
