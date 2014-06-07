@@ -38,8 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     #'mongoengine.django.mongo_auth',
     'bootstrap3',
-    'organiser_app',
     'djangotoolbox',
+    'organiser_app',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,3 +86,4 @@ TEMPLATE_DIRS = (
 )
 
 AUTH_USER_MODEL = 'organiser_app.User'
+LOGIN_URL = "/login"

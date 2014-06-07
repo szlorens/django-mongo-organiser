@@ -88,7 +88,7 @@ class LoginRequiredMixin(object):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 
-class MyProfile(UpdateView, LoginRequiredMixin):
+class MyProfile(LoginRequiredMixin, UpdateView):
     model = User
     fields = ['email', 'password']
     template_name = 'myprofile.html'
