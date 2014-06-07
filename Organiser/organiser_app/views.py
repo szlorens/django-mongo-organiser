@@ -1,16 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as auth_logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
-from django.views.generic.base import TemplateResponseMixin
-from django.views.generic.edit import ProcessFormView, ModelFormMixin, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from organiser_app.forms import ProfileForm, NoteForm, RegisterForm
-
-from organiser_app.models import User, Note, CalendarEvent
+from organiser_app.forms import ProfileForm, NoteForm, RegisterForm, CalendarEventForm
+from organiser_app.models import Note, CalendarEvent
 
 
 def index(request):
@@ -45,12 +43,12 @@ def dashboard_view(request):
     user = request.user
     notes = Note.objects.filter(author=user)
     events = CalendarEvent.objects.filter(author=user)
-    return render(request, "organiser_app/dashboard.html", {"notes": notes, "events" : events})
+    return render(request, "organiser_app/dashboard.html", {"notes": notes, "events": events})
 
 
 @login_required
 def calendar_view(request):
-    pass
+    return render(request, 'organiser_app/calendar.html')
 
 
 @login_required()
@@ -118,7 +116,7 @@ class NoteMixin(LoginRequiredMixin):
 class CreateNote(NoteMixin, CreateView):
     def get_initial(self):
         initial = super(CreateNote, self).get_initial()
-        initial['author'] = self.request.user._wrapped
+        initial['author'] = self.request.user
         return initial
 
 
@@ -133,7 +131,13 @@ class DeleteNote(NoteMixin, DeleteView):
 
 class CreateEvent(LoginRequiredMixin, CreateView):
     model = CalendarEvent
+    form_class = CalendarEventForm
     pk_url_kwarg = 'event_id'
+
+    def get_initial(self):
+        initial = super(CreateEvent, self).get_initial()
+        initial['author'] = self.request.user
+        return initial
 
 
 

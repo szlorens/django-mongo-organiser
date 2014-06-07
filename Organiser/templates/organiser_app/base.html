@@ -3,12 +3,21 @@
 <head lang="en">
     <meta charset="UTF-8">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     {% load bootstrap3 %}
+    {% load bootstrap_calendar %}
+
     {% bootstrap_css %}
+    {% bootstrap_calendar_css %}
 
     <!--<link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css" />-->
     <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css"/>
     {% bootstrap_javascript %}
+
+    {# TODO add language_code param to those tags and create pl.js file #}
+    {% bootstrap_calendar_js %}
+    {% bootstrap_calendar_init events_url="bootstrap-calendar" %}
+
     {% block custom_js %}{% endblock %}
     <style>
         body {

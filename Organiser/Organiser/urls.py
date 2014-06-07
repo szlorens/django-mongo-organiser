@@ -21,8 +21,12 @@ urlpatterns = patterns('',
     url(r'^note/(?P<note_id>[^/]+)/delete', views.DeleteNote.as_view(), name='note-delete'),
     #url(r'^note/(?P<note_id>[^/]+)/(?P<action>[^/]+)$', views.note_view, name='note'),
     url(r'^notes/new$', views.CreateNote.as_view(), name='note-new'),
+    url(r'^profile', views.myprofile_view, name='my-profile'),
+
 
     url(r'^logout$',  'django.contrib.auth.views.logout', {'next_page': LOGIN_URL}, name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
+    #url(r'^bootstrap-calendar/', include('django_bootstrap_calendar.urls')),
+
 )

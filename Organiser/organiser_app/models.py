@@ -35,9 +35,9 @@ class Contact(models.Model):
 
 
 class CalendarEvent(models.Model):
-    title = models.TextField(max_length=100)
-    description = models.TextField(default=None, null=True, blank=True)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField(default=None, null=True, blank=True)
+    title = models.TextField(max_length=100, verbose_name="Tytuł")
+    description = models.TextField(default=None, null=True, blank=True, verbose_name="Opis")
+    start_date = models.DateTimeField(verbose_name="Data rozpoczęcia")
+    end_date = models.DateTimeField(default=None, null=True, blank=True, verbose_name="Data zakończenia")
     location = models.TextField(max_length=300, verbose_name="Miejsce wydarzenia", default=None, null=True, blank=True)
     author = models.ForeignKey(User)

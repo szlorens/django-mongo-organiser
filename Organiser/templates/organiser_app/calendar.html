@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "organiser_app/base.html" %}
+{% load bootstrap3 %}
+{% load bootstrap_calendar %}
 
-</body>
-</html>
+{% block title %}Kalendarz{% endblock %}
+{% block content %}
+    <div class="container">
+
+       {% bootstrap_controls '' %}
+        {% bootstrap_calendar '' %}
+
+    </div>
+
+{% endblock %}

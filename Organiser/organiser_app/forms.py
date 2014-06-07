@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import HiddenInput
-from organiser_app.models import Note
+from organiser_app.models import Note, CalendarEvent
 
 __author__ = 'pawelszymanski'
 
@@ -26,3 +26,12 @@ class NoteForm(forms.ModelForm):
         widgets = {
             'author': HiddenInput()
         }
+
+
+class CalendarEventForm(forms.ModelForm):
+    class Meta:
+        model = CalendarEvent
+        #fields = ['title', 'description', 'start_date', 'end_date', 'location']
+        exclude = ['author']
+
+

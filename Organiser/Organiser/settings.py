@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'djangotoolbox',
     'organiser_app',
-
+    'django_bootstrap_calendar',
 )
 
 MIDDLEWARE_CLASSES = (
