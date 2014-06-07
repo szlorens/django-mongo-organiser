@@ -15,7 +15,7 @@ class ProfileForm(forms.ModelForm):
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ['title', 'content','author']
+        fields = ['title', 'content', 'author']
         widgets = {
             'author': HiddenInput()
         }

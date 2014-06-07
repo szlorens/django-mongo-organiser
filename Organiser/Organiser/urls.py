@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^notes$', views.notes_view, name='notes'),
     url(r'^note/(?P<note_id>[^/]+)$', views.note_view, name='note'),
     url(r'^note/(?P<note_id>[^/]+)/edit$', views.EditNote.as_view(), name='note-edit'),
+    url(r'^note/(?P<note_id>[^/]+)/delete', views.DeleteNote.as_view(), name='note-delete'),
     #url(r'^note/(?P<note_id>[^/]+)/(?P<action>[^/]+)$', views.note_view, name='note'),
     url(r'^notes/new$', views.CreateNote.as_view(), name='note-new'),
 

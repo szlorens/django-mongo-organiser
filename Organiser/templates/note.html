@@ -11,12 +11,12 @@
         <div class="col-md-3">
             <br/>
             <div class="row top-buffer">
-                <button type="submit" class="btn btn-info btn-block">
+                <a href="/note/{{ note.id }}/edit" class="btn btn-info btn-block">
                     {% bootstrap_icon "edit" %} Edytuj
-                </button>
-                <button type="submit" class="btn btn-danger pull-right btn-block" >
+                </a>
+                <a  href="/note/{{ note.id }}/delete" class="btn btn-danger pull-right btn-block" >
                     {% bootstrap_icon "remove" %} Usuń
-                </button>
+                </a>
             </div>
             <div class="row">
                 <hr />
@@ -24,7 +24,7 @@
                 <p>{{ note.create_date }}</p>
 
                 <h3>Data ostatniej edycji</h3>
-                <p>{{ note.create_date }}</p>
+                <p>{{ note.edit_date }}</p>
             </div>
 
         </div>

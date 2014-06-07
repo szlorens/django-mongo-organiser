@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateResponseMixin
-from django.views.generic.edit import ProcessFormView, ModelFormMixin, CreateView, UpdateView
-from django.forms import models as model_forms, HiddenInput
+from django.views.generic.edit import ProcessFormView, ModelFormMixin, CreateView, UpdateView, DeleteView
 
 from organiser_app.forms import ProfileForm, NoteForm
 
@@ -89,13 +90,17 @@ def myprofile_view(request):
     form = ProfileForm(instance=request.user)
     return render(request, 'myprofile.html', {"form": form})
 
-
 class RegisterView(TemplateResponseMixin, ModelFormMixin, ProcessFormView):
     form_class = UserCreationForm
     model = User
     success_url = '/login'
     object = User()
     template_name = 'register.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user:
+            return HttpResponseRedirect('/')
+        return super(RegisterView, self).get(request, *args, **kwargs)
 
 
 class LoginRequiredMixin(object):
@@ -114,6 +119,7 @@ class CreateNote(LoginRequiredMixin, CreateView):
         initial['author'] = self.request.user._wrapped
         return initial
 
+
 class EditNote(LoginRequiredMixin, UpdateView):
     form_class = NoteForm
     template_name = 'note_form.html'
@@ -121,7 +127,11 @@ class EditNote(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'note_id'
 
 
-
+class DeleteNote(LoginRequiredMixin, DeleteView):
+    model = Note
+    template_name = 'note_check_delete.html'
+    pk_url_kwarg = 'note_id'
+    success_url = reverse_lazy('notes')
 
 
 
