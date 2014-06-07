@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "organiser_app/base.html" %}
 {% load bootstrap3 %}
 {% block title %}Moje dane{% endblock %}
 {% block content %}
@@ -28,7 +28,10 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h2><span class="glyphicon glyphicon-calendar"></span> Kalendarz</h2>
+            <h2>
+                <span class="glyphicon glyphicon-calendar"></span> Wydarzenia
+                <a href="/events/new" class="btn btn-primary pull-right">{% bootstrap_icon 'plus' %}</a>
+            </h2>
             <hr/>
             {% if events %}
                 {% for event in events %}

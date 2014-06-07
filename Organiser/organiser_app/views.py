@@ -17,7 +17,7 @@ def index(request):
     if request.user.is_authenticated():
         return dashboard_view(request)
     else:
-        return render(request, "index.html")
+        return render(request, "organiser_app/index.html")
 
 
 def logout(request):
@@ -37,7 +37,7 @@ def login_view(request):
             form = AuthenticationForm(request.POST)
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {"form": form})
+    return render(request, 'organiser_app/login.html', {"form": form})
 
 
 @login_required()
@@ -45,7 +45,7 @@ def dashboard_view(request):
     user = request.user
     notes = Note.objects.filter(author=user)
     events = CalendarEvent.objects.filter(author=user)
-    return render(request, "dashboard.html", {"notes": notes, "events" : events})
+    return render(request, "organiser_app/dashboard.html", {"notes": notes, "events" : events})
 
 
 @login_required
@@ -82,19 +82,19 @@ def note_view(request, note_id):
     #     note.delete()
     #     return index(request)
     # else:
-    return render(request, "note.html", {"note": note})
+    return render(request, "organiser_app/note.html", {"note": note})
 
 
 @login_required()
 def myprofile_view(request):
     form = ProfileForm(instance=request.user)
-    return render(request, 'myprofile.html', {"form": form})
+    return render(request, 'organiser_app/myprofile.html', {"form": form})
 
 
 class RegisterView(CreateView):
     form_class = RegisterForm
     success_url = '/login'
-    template_name = 'register.html'
+    template_name = 'organiser_app/register.html'
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated():
@@ -108,30 +108,32 @@ class LoginRequiredMixin(object):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
 
 
-class CreateNote(LoginRequiredMixin, CreateView):
+class NoteMixin(LoginRequiredMixin):
     form_class = NoteForm
     model = Note
-    template_name = 'note_form.html'
+    template_name = 'organiser_app/note_form.html'
+    pk_url_kwarg = 'note_id'
 
+
+class CreateNote(NoteMixin, CreateView):
     def get_initial(self):
         initial = super(CreateNote, self).get_initial()
         initial['author'] = self.request.user._wrapped
         return initial
 
 
-class EditNote(LoginRequiredMixin, UpdateView):
-    form_class = NoteForm
-    template_name = 'note_form.html'
-    model = Note
-    pk_url_kwarg = 'note_id'
+class EditNote(NoteMixin, UpdateView):
+    pass
 
 
-class DeleteNote(LoginRequiredMixin, DeleteView):
-    model = Note
+class DeleteNote(NoteMixin, DeleteView):
     template_name = 'note_check_delete.html'
-    pk_url_kwarg = 'note_id'
     success_url = reverse_lazy('notes')
 
+
+class CreateEvent(LoginRequiredMixin, CreateView):
+    model = CalendarEvent
+    pk_url_kwarg = 'event_id'
 
 
 

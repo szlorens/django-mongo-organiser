@@ -1,0 +1,23 @@
+{% extends "organiser_app/base.html" %}
+{% load bootstrap3 %}
+{% block title %}Notatka{% endblock %}
+{% block content %}
+    <div class="container">
+
+        <div class="col-md-9">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                   {% buttons %}
+                <button type="submit" class="btn btn-primary pull-right">
+                    {% bootstrap_icon 'save' %} Zapisz
+                </button>
+                <button type="reset" class="btn btn-danger">
+                    {% bootstrap_icon "remove" %} Anuluj
+                </button>
+                {% endbuttons %}
+                </form>
+        </div>
+    </div>
+
+{% endblock %}
