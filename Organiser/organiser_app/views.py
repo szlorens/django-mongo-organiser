@@ -1,9 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as auth_logout
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
-from django.views.generic import UpdateView
+from django.views.generic.base import TemplateResponseMixin
+from django.views.generic.detail import SingleObjectTemplateResponseMixin
+from django.views.generic.edit import ProcessFormView, FormMixin, CreateView, ModelFormMixin
+from django.forms import models as model_forms
+
+from organiser_app.forms import ProfileForm
 
 from organiser_app.models import User, Note
 
@@ -33,10 +38,6 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {"form": form})
-
-
-def register_view(request):
-    pass
 
 
 @login_required()
@@ -79,23 +80,13 @@ def note_view(requst):
 
 @login_required()
 def myprofile_view(request):
-    pass
+    form = ProfileForm(instance=request.user)
+    return render(request, 'myprofile.html', {"form": form})
 
 
-class LoginRequiredMixin(object):
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
-
-
-class MyProfile(LoginRequiredMixin, UpdateView):
+class RegisterView(TemplateResponseMixin, ModelFormMixin, ProcessFormView):
+    form_class = UserCreationForm
     model = User
-    fields = ['email', 'password']
-    template_name = 'myprofile.html'
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-
-
-
+    success_url = '/login'
+    object = User()
+    template_name = 'register.html'
