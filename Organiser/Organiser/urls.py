@@ -13,8 +13,10 @@ urlpatterns = patterns('',
     url(r'^event/(?P<event_id>[^/]+)$', views.event_view, name='event'),
     url(r'^contacts$', views.contacts_view, name='contacts'),
     url(r'^contact/(?P<contact_id>[^/]+)$', views.contact_view, name='contact'),
+
     url(r'^notes$', views.notes_view, name='notes'),
     url(r'^note/(?P<note_id>[^/]+)$', views.note_view, name='note'),
+    #url(r'^note/(?P<note_id>[^/]+)/(?P<action>[^/]+)$', views.note_view, name='note'),
     url(r'^myprofile$', views.MyProfile.as_view(), name='myprofile'),
     url(r'^logout$', views.login_view, name='logout'),
 

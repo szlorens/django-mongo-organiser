@@ -75,6 +75,11 @@ def notes_view(request):
 def note_view(request, note_id):
     user = request.user
     note = Note.objects.get(id=note_id)
+
+    # if action == "delete":
+    #     note.delete()
+    #     return index(request)
+    # else:
     return render(request, "note.html", {"note": note})
 
 
