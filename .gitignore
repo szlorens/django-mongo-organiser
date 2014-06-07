@@ -56,3 +56,4 @@ Organiser/Organiser/db_settings.py
 # Sphinx documentation
 docs/_build/
 
+.idea/

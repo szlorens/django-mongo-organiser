@@ -1,0 +1,6 @@
+-e git+https://github.com/django-nonrel/django@cf7d480ec1bb11fa635dfcfea7f6f147435c7cac#egg=Django-origin
+django-bootstrap3==4.7.0
+-e git+https://github.com/django-nonrel/mongodb-engine@f01404715bc0503153b983af6d8a950eb2baeb78#egg=django_mongodb_engine-master
+-e git+https://github.com/django-nonrel/djangotoolbox@6536b0e6080dce2ad89c22fa4ea671e1f7e817f5#egg=djangotoolbox-master
+pymongo==2.7.1
+wsgiref==0.1.2
