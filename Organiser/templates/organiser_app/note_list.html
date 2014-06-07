@@ -1,0 +1,12 @@
+{% extends "organiser_app/base.html" %}
+{% load bootstrap3 %}
+{% block title %}Notatka{% endblock %}
+{% block content %}
+    <h1>Lista notatek</h1>
+    <hr/>
+    <div class="col-md-9">
+         {% for note in notes %}
+        {{ note }}<br/>
+        {% endfor %}
+    </div>
+{% endblock %}

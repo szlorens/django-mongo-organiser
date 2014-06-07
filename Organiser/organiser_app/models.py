@@ -1,6 +1,7 @@
 # coding=utf-8
 from datetime import datetime
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser, UserManager
+from django.core.urlresolvers import reverse_lazy
 from django.db import models
 from djangotoolbox.fields import EmbeddedModelField, RawField
 
@@ -19,7 +20,7 @@ class Note(models.Model):
     author = models.ForeignKey(User)
 
     def get_absolute_url(self):
-        return '/note/' + self.id
+        return reverse_lazy('note', args=(self.id,))
 
     def __str__(self):
         return self.author.get_full_name() + " - " + self.title

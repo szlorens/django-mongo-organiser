@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.utils.datetime_safe import datetime
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from organiser_app.forms import ProfileForm, NoteForm, RegisterForm, CalendarEventForm
@@ -123,7 +123,6 @@ class CreateNote(NoteMixin, CreateView):
     def get_initial(self):
         initial = super(CreateNote, self).get_initial()
         initial['author'] = self.request.user
-        initial['create'] = True
         return initial
 
 
@@ -168,8 +167,17 @@ class CreateEvent(EventMixin, CreateView):
     def get_initial(self):
         initial = super(CreateEvent, self).get_initial()
         initial['author'] = self.request.user
-        initial['create'] = True
         return initial
+
+
+class NoteList(LoginRequiredMixin, ListView):
+    model = Note
+    context_object_name = 'notes'
+
+    def get_queryset(self):
+        return Note.objects.filter(author=self.request.user)
+
+
 
 
 
