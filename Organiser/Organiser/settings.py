@@ -60,7 +60,7 @@ WSGI_APPLICATION = 'Organiser.wsgi.application'
 
 LANGUAGE_CODE = 'pl-pl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET'
 
 USE_I18N = True
 
