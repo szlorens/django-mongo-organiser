@@ -9,7 +9,7 @@ from django.forms import models as model_forms, HiddenInput
 
 from organiser_app.forms import ProfileForm, NoteForm
 
-from organiser_app.models import User, Note
+from organiser_app.models import User, Note, CalendarEvent
 
 
 def index(request):
@@ -20,7 +20,7 @@ def index(request):
 
 
 def logout(request):
-    auth_logout()
+    auth_logout(request)
     return index(request)
 
 
@@ -43,7 +43,8 @@ def login_view(request):
 def dashboard_view(request):
     user = request.user
     notes = Note.objects.filter(author=user)
-    return render(request, "dashboard.html", {"notes": notes})
+    events = CalendarEvent.objects.filter(author=user)
+    return render(request, "dashboard.html", {"notes": notes, "events" : events})
 
 
 @login_required

@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.contrib.auth.views import logout
 from organiser_app import views
 
 admin.autodiscover()
