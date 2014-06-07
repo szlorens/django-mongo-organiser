@@ -1,6 +1,6 @@
-from django.conf.global_settings import LOGIN_URL
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.conf import settings
 from organiser_app import views
 
 admin.autodiscover()
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^events/new$', views.CreateEvent.as_view(), name='event-new'),
     url(r'^contacts$', views.contacts_view, name='contacts'),
     url(r'^contact/(?P<contact_id>[^/]+)$', views.contact_view, name='contact'),
-    url(r'^notes$', views.notes_view, name='notes'),
+    url(r'^notes$', views.NoteList.as_view(), name='notes'),
     url(r'^note/(?P<note_id>[^/]+)$', views.note_view, name='note'),
     url(r'^note/(?P<note_id>[^/]+)/edit$', views.EditNote.as_view(), name='note-edit'),
     url(r'^note/(?P<note_id>[^/]+)/delete', views.DeleteNote.as_view(), name='note-delete'),
@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^profile', views.MyProfileView, name='my-profile'),
 
 
-    url(r'^logout$',  'django.contrib.auth.views.logout', {'next_page': LOGIN_URL}, name='logout'),
+    url(r'^logout$',  'django.contrib.auth.views.logout', {'next_page': settings.LOGIN_URL}, name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^bootstrap-calendar/', include('django_bootstrap_calendar.urls')),
