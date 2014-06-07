@@ -2,11 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
+from organiser_app.models import User, Note
 
 
 def index(request):
     if request.user.is_authenticated():
-        return render(request, "dashboard.html")
+        return dashboard_view(request)
     else:
         return render(request, "index.html")
 
@@ -33,6 +34,14 @@ def login_view(request):
 
 def register_view(request):
     pass
+
+
+@login_required()
+def dashboard_view(request):
+    user = User.objects.get(pk=request.user.id)
+    notes = Note.objects.filter(author=user)
+
+    return render(request, "dashboard.html", {"notes": notes})
 
 
 @login_required
