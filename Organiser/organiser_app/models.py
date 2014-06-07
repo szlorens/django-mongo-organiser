@@ -31,6 +31,7 @@ class Contact(models.Model):
     phone_number = models.TextField(max_length=12, verbose_name="Numer telefonu")
     location = models.TextField(max_length=300, verbose_name="Miejsce zamieszkania")
     additional_info = models.TextField(max_length=500, verbose_name="Dodatkowe informacje")
+    author = models.ForeignKey(User)
 
 
 class CalendarEvent(models.Model):
@@ -39,3 +40,4 @@ class CalendarEvent(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(default=None, null=True, blank=True)
     location = models.TextField(max_length=300, verbose_name="Miejsce wydarzenia", default=None, null=True, blank=True)
+    author = models.ForeignKey(User)
