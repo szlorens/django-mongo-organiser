@@ -123,7 +123,6 @@ class CreateNote(NoteMixin, CreateView):
     def get_initial(self):
         initial = super(CreateNote, self).get_initial()
         initial['author'] = self.request.user
-        initial['create'] = True
         return initial
 
 
@@ -159,7 +158,6 @@ class CreateEvent(EventMixin, CreateView):
     def get_initial(self):
         initial = super(CreateEvent, self).get_initial()
         initial['author'] = self.request.user
-        initial['create'] = True
         return initial
 
 
