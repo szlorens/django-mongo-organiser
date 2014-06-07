@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^contact/(?P<contact_id>\*)$', views.contact_view, name='contact'),
     url(r'^notess$', views.notes_view, name='notes'),
     url(r'^contact/(?P<note_id>\*)$', views.note_view, name='note'),
-    url(r'^myprofile$', views.myprofile_view, name='myprofile'),
+    url(r'^myprofile$', views.MyProfile.as_view(), name='myprofile'),
     url(r'^logout$', views.login_view, name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
