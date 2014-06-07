@@ -1,10 +1,11 @@
 # coding=utf-8
-from django.contrib.auth.models import AbstractUser, AbstractBaseUser
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser, UserManager
 from django.db import models
 from djangotoolbox.fields import EmbeddedModelField, RawField
 
 
 class User(AbstractUser):
+    #objects = UserManager()
     def __str__(self):
         return "Userasd"
 
