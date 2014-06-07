@@ -3,7 +3,7 @@
 {% block title %}Notatka{% endblock %}
 {% block content %}
     <h1>
-        {% if form.initial.create %}
+        {% if not object %}
             Nowa notatka
         {% else %}
             Edycja notatki
