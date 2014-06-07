@@ -1,5 +1,24 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 {% block title %}Moje dane{% endblock %}
 {% block content %}
-
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title"><strong>Zaloguj się</strong></h3></div>
+            <div class="panel-body">
+                <form role="form" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <a href="/" class="btn btn-danger">
+                            {% bootstrap_icon "remove" %} Anuluj
+                        </a>
+                        <button type="submit" class="btn btn-primary pull-right">
+                            {% bootstrap_icon "ok" %} Zaloguj się
+                        </button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

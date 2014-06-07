@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as auth_logout
-from django.shortcuts import render
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
 
 
 def index(request):
@@ -16,7 +17,18 @@ def logout(request):
 
 
 def login_view(request):
-    pass
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            form = AuthenticationForm(request.POST)
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {"form": form})
 
 
 def register_view(request):
