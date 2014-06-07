@@ -1,16 +1,18 @@
 # coding=utf-8
-from django.contrib.auth.models import AbstractUser, AbstractBaseUser
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser, UserManager
 from django.db import models
 from djangotoolbox.fields import EmbeddedModelField, RawField
 
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
+    #objects = UserManager()
     def __str__(self):
         return "Userasd"
 
 class Note(models.Model):
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
     edit_date = models.DateTimeField(verbose_name="Data edycji", null=True, blank=True, default=None)
+    title = models.CharField(verbose_name="Tytuł", max_length=100)
     content = models.TextField(verbose_name="Treść", default=None)
     author = EmbeddedModelField('User', verbose_name="Autor")
 
