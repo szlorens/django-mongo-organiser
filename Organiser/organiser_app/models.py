@@ -4,7 +4,7 @@ from django.db import models
 from djangotoolbox.fields import EmbeddedModelField, RawField
 
 
-class User(AbstractUser):
+class User(AbstractBaseUser):
     def __str__(self):
         return "Userasd"
 

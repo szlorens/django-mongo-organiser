@@ -7,13 +7,22 @@
     {% bootstrap_css %}
 
     <!--<link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css" />-->
-    <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css"/>
     {% bootstrap_javascript %}
     {% block custom_js %}{% endblock %}
+    <style>
+        body {
+            padding-top: 50px;
+        }
+    </style>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 {% include "top_menu.html" %}
-{% block content %}{% endblock %}
+<div class="container">
+    {% block content %}
+
+    {% endblock %}
+</div>
 </body>
 </html>
