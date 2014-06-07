@@ -12,7 +12,7 @@ class User(AbstractUser):
 
 class Note(models.Model):
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
-    edit_date = models.DateTimeField(verbose_name="Data edycji", null=True, blank=True)
+    edit_date = models.DateTimeField(verbose_name="Data edycji", null=True, blank=True, auto_now=True)
     title = models.CharField(verbose_name="Tytuł", max_length=100)
     content = models.TextField(verbose_name="Treść", default=None)
     author = models.ForeignKey(User)

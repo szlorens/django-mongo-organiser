@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import ProcessFormView, ModelFormMixin, CreateView, UpdateView, DeleteView
 
-from organiser_app.forms import ProfileForm, NoteForm
+from organiser_app.forms import ProfileForm, NoteForm, RegisterForm
 
 from organiser_app.models import User, Note, CalendarEvent
 
@@ -90,15 +90,14 @@ def myprofile_view(request):
     form = ProfileForm(instance=request.user)
     return render(request, 'myprofile.html', {"form": form})
 
-class RegisterView(TemplateResponseMixin, ModelFormMixin, ProcessFormView):
-    form_class = UserCreationForm
-    model = User
+
+class RegisterView(CreateView):
+    form_class = RegisterForm
     success_url = '/login'
-    object = User()
     template_name = 'register.html'
 
     def get(self, request, *args, **kwargs):
-        if request.user:
+        if request.user.is_authenticated():
             return HttpResponseRedirect('/')
         return super(RegisterView, self).get(request, *args, **kwargs)
 
