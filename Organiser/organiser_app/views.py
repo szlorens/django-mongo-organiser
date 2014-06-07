@@ -42,9 +42,7 @@ def register_view(request):
 @login_required()
 def dashboard_view(request):
     user = request.user
-    print user
     notes = Note.objects.filter(author=user)
-    print notes
     return render(request, "dashboard.html", {"notes": notes})
 
 
@@ -74,8 +72,10 @@ def notes_view(request):
 
 
 @login_required()
-def note_view(requst):
-    pass
+def note_view(request, note_id):
+    user = request.user
+    note = Note.objects.get(id=note_id)
+    return render(request, "note.html", {"note": note})
 
 
 @login_required()

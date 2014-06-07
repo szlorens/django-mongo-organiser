@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}Notatka{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="col-md-9">
+            <h1>{{ note.title }}</h1>
+            <hr/>
+            {{ note.content }}
+        </div>
+        <div class="col-md-3">
+            <br/>
+            <div class="row top-buffer">
+                <button type="submit" class="btn btn-info btn-block">
+                    {% bootstrap_icon "edit" %} Edytuj
+                </button>
+                <button type="submit" class="btn btn-danger pull-right btn-block">
+                    {% bootstrap_icon "remove" %} Usuń
+                </button>
+            </div>
+            <div class="row">
+                <hr />
+                <h3>Data utworzenia</h3>
 
-</body>
-</html>
+                <p>{{ note.create_date }}</p>
+
+                <h3>Data ostatniej edycji</h3>
+
+                <p>{{ note.create_date }}</p>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
