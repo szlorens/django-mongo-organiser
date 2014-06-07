@@ -2,10 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateResponseMixin
-from django.views.generic.edit import ProcessFormView, ModelFormMixin
+from django.views.generic.edit import ProcessFormView, ModelFormMixin, CreateView, UpdateView
+from django.forms import models as model_forms, HiddenInput
 
-from organiser_app.forms import ProfileForm
+from organiser_app.forms import ProfileForm, NoteForm
 
 from organiser_app.models import User, Note
 
@@ -93,3 +95,35 @@ class RegisterView(TemplateResponseMixin, ModelFormMixin, ProcessFormView):
     success_url = '/login'
     object = User()
     template_name = 'register.html'
+
+
+class LoginRequiredMixin(object):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+
+class CreateNote(LoginRequiredMixin, CreateView):
+    form_class = NoteForm
+    model = Note
+    template_name = 'note_form.html'
+
+    def get_initial(self):
+        initial = super(CreateNote, self).get_initial()
+        initial['author'] = self.request.user._wrapped
+        return initial
+
+class EditNote(LoginRequiredMixin, UpdateView):
+    form_class = NoteForm
+    template_name = 'note_form.html'
+    model = Note
+    pk_url_kwarg = 'note_id'
+
+
+
+
+
+
+
+
+

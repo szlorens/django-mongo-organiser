@@ -12,10 +12,13 @@ class User(AbstractUser):
 
 class Note(models.Model):
     create_date = models.DateTimeField(auto_now_add=True, verbose_name="Data utworzenia")
-    edit_date = models.DateTimeField(verbose_name="Data edycji", null=True, blank=True, default=None)
+    edit_date = models.DateTimeField(verbose_name="Data edycji", auto_now=True, null=True, blank=True, default=None)
     title = models.CharField(verbose_name="Tytuł", max_length=100)
     content = models.TextField(verbose_name="Treść", default=None)
     author = models.ForeignKey(User)
+
+    def get_absolute_url(self):
+        return '/note/' + self.id
 
     def __str__(self):
         return self.author.get_full_name() + " - " + self.title
