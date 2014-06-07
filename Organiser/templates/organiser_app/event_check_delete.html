@@ -1,16 +1,16 @@
 {% extends "organiser_app/base.html" %}
 {% load bootstrap3 %}
-{% block title %}Notatka{% endblock %}
+{% block title %}Usuwanie wydarzenia{% endblock %}
 {% block content %}
     <div class="col-md-8 col-md-offset-2">
-        <h1 class="text-center">Czy na pewno chcesz usunąć notatkę?</h1>
+        <h1 class="text-center">Czy na pewno chcesz usunąć wydarzenie?</h1>
         <hr/>
-        <form action="{% url 'note-delete' note_id=note.id %}" method="POST">
+        <form action="{% url 'event-delete' event_id=cal %}" method="POST">
             {% csrf_token %}
-            <a href="{% url 'note' note_id=note.id %}" class="btn btn-warning">
+            <a href="{% url 'event' event_id=cal %}" class="btn btn-warning">
                 {% bootstrap_icon "remove" %} Anuluj</a>
             <button type="submit" class="btn btn-danger pull-right">
-                {% bootstrap_icon "trash" %} Usuń notatkę
+                {% bootstrap_icon "trash" %} Usuń wydarzenie
             </button>
         </form>
     </div>

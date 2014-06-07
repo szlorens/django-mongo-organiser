@@ -36,7 +36,7 @@
                 <hr/>
                 {% if events %}
                     {% for event in events %}
-                        <a href="{% url 'event' event_id=event.id %}" class="list-group-item">
+                        <a href="{% url 'event' event_id=event.id %}" class="list-group-item {% if event.isActive %}active{% endif %}">
                             <div class="list-group-item-heading">
                                 <h4>{{ event.title }}</h4>
                                 <small>{{ event.start_date }}</small>

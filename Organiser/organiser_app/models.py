@@ -1,4 +1,5 @@
 # coding=utf-8
+from datetime import datetime
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser, UserManager
 from django.db import models
 from djangotoolbox.fields import EmbeddedModelField, RawField
@@ -6,7 +7,7 @@ from djangotoolbox.fields import EmbeddedModelField, RawField
 
 class User(AbstractUser):
     # objects = UserManager()
-    def __str__(self):
+    def __unicode__(self):
         return self.get_full_name() + " [" + self.email + "]"
 
 
@@ -44,3 +45,9 @@ class CalendarEvent(models.Model):
 
     def __unicode__(self):
         return self.author.get_full_name() + " - " + self.title + " [" + str(self.start_date)+ "]"
+
+    def isActive(self):
+        if self.end_date:
+            return self.start_date <= datetime.now() and self.end_date >= datetime.now()
+        else:
+            return False

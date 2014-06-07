@@ -2,29 +2,34 @@
 {% load bootstrap3 %}
 {% block title %}Notatka{% endblock %}
 {% block content %}
-    <div class="col-md-9">
-        <h1>{{ note.title }}</h1>
+    <div class="col-md-12">
+        <h1>Podgląd notatki</h1>
         <hr/>
-        {{ note.content }}
-    </div>
-    <div class="col-md-3">
-        <br/>
-
-        <div class="row top-buffer">
-            <a href="{% url 'note-edit' note_id=note.id %}" class="btn btn-info btn-block">
-                {% bootstrap_icon "edit" %} Edytuj
-            </a>
-            <a href="{% url 'note-delete' note_id=note.id %}" class="btn btn-danger pull-right btn-block">
-                {% bootstrap_icon "remove" %} Usuń
-            </a>
+        <div class="col-md-9">
+            <h2>{{ note.title }}</h2>
+            {{ note.content }}
         </div>
-        <div class="row">
-            <hr/>
-            <h3>Data utworzenia</h3>
-            <p>{{ note.create_date }}</p>
+        <div class="col-md-3">
+            <br/>
 
-            <h3>Data ostatniej edycji</h3>
-            <p>{{ note.edit_date }}</p>
+            <div class="row top-buffer">
+                <a href="{% url 'note-edit' note_id=note.id %}" class="btn btn-info btn-block">
+                    {% bootstrap_icon "edit" %} Edytuj
+                </a>
+                <a href="{% url 'note-delete' note_id=note.id %}" class="btn btn-danger pull-right btn-block">
+                    {% bootstrap_icon "remove" %} Usuń
+                </a>
+            </div>
+            <div class="row">
+                <hr/>
+                <h3>Data utworzenia</h3>
+
+                <p>{{ note.create_date }}</p>
+
+                <h3>Data ostatniej edycji</h3>
+
+                <p>{{ note.edit_date }}</p>
+            </div>
         </div>
     </div>
 {% endblock %}

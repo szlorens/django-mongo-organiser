@@ -5,6 +5,19 @@
     <h1>Podgląd wydarzenia</h1>
     <hr/>
     <div class="col-md-12">
-        {{ calendarevent }}
+        <div class="col-md-9">
+            <h2>{{ calendarevent.title }}</h2>
+
+        </div>
+        <div class="col-md-3">
+            <div class="row top-buffer">
+                <a href="{% url 'event-edit' event_id=calendarevent.id %}" class="btn btn-info btn-block">
+                    {% bootstrap_icon "edit" %} Edytuj
+                </a>
+                <a href="{% url 'event-delete' event_id=calendarevent.id %}" class="btn btn-danger pull-right btn-block">
+                    {% bootstrap_icon "remove" %} Usuń
+                </a>
+            </div>
+        </div>
     </div>
 {% endblock %}

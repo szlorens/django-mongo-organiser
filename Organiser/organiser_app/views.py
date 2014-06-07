@@ -132,7 +132,7 @@ class EditNote(NoteMixin, UpdateView):
 
 
 class DeleteNote(NoteMixin, DeleteView):
-    template_name = 'note_check_delete.html'
+    template_name = 'organiser_app/note_check_delete.html'
     success_url = reverse_lazy('notes')
 
 
@@ -149,6 +149,15 @@ class ShowEvent(EventMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ShowEvent, self).get_context_data(**kwargs)
         return context
+
+
+class EditEvent(EventMixin, UpdateView):
+    pass
+
+
+class DeleteEvent(EventMixin, DeleteView):
+
+    success_url = reverse_lazy('events')
 
 
 class CreateEvent(EventMixin, CreateView):
