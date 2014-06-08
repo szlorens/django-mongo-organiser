@@ -2,28 +2,30 @@
 {% load bootstrap3 %}
 {% block title %}Notatka{% endblock %}
 {% block content %}
-    {{ form.media }}
-    <h1>
-        {% if form.initial.create %}
-            Nowe wydarzenie
-        {% else %}
-            Edycja wydarzenia
-        {% endif %}
-    </h1>
-    <hr/>
-    <div class="col-md-5 col-md-offset-3">
-        <form method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <hr />
-                <button type="submit" class="btn btn-primary pull-right">
-                    {% bootstrap_icon 'save' %} Zapisz
-                </button>
-                <button type="reset" class="btn btn-danger">
-                    {% bootstrap_icon "remove" %} Anuluj
-                </button>
-            {% endbuttons %}
-        </form>
+    <div class="col-md-12">
+        {{ form.media }}
+        <h1>
+            {% if not object %}
+                Nowe wydarzenie
+            {% else %}
+                Edycja wydarzenia
+            {% endif %}
+        </h1>
+        <hr/>
+        <div class="col-md-5 col-md-offset-3">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <hr/>
+                    <button type="submit" class="btn btn-primary pull-right">
+                        {% bootstrap_icon 'save' %} Zapisz
+                    </button>
+                    <button type="reset" class="btn btn-danger">
+                        {% bootstrap_icon "remove" %} Anuluj
+                    </button>
+                {% endbuttons %}
+            </form>
+        </div>
     </div>
 {% endblock %}

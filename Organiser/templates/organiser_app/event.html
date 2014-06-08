@@ -2,12 +2,14 @@
 {% load bootstrap3 %}
 {% block title %}Wydarzenie z kalendarza{% endblock %}
 {% block content %}
-    <h1>Podgląd wydarzenia</h1>
-    <hr/>
     <div class="col-md-12">
+        <h1>Podgląd wydarzenia</h1>
+        <hr/>
         <div class="col-md-9">
             <h2>{{ calendarevent.title }}</h2>
-            <h3>{{ calendarevent.start_date }}{% if calendarevent.end_date %} do {{ calendarevent.end_date }}{% endif %}</h3>
+
+            <h3>{{ calendarevent.start_date }}{% if calendarevent.end_date %} do
+                {{ calendarevent.end_date }}{% endif %}</h3>
             <hr/>
             {{ calendarevent.location }}
         </div>
@@ -16,7 +18,8 @@
                 <a href="{% url 'event-edit' event_id=calendarevent.id %}" class="btn btn-info btn-block">
                     {% bootstrap_icon "edit" %} Edytuj
                 </a>
-                <a href="{% url 'event-delete' event_id=calendarevent.id %}" class="btn btn-danger pull-right btn-block">
+                <a href="{% url 'event-delete' event_id=calendarevent.id %}"
+                   class="btn btn-danger pull-right btn-block">
                     {% bootstrap_icon "remove" %} Usuń
                 </a>
             </div>

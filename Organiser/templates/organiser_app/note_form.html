@@ -2,26 +2,28 @@
 {% load bootstrap3 %}
 {% block title %}Notatka{% endblock %}
 {% block content %}
-    <h1>
-        {% if not object %}
-            Nowa notatka
-        {% else %}
-            Edycja notatki
-        {% endif %}
-    </h1>
-    <hr/>
-    <div class="col-md-9">
-        <form method="post">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary pull-right">
-                    {% bootstrap_icon 'save' %} Zapisz
-                </button>
-                <button type="reset" class="btn btn-danger">
-                    {% bootstrap_icon "remove" %} Anuluj
-                </button>
-            {% endbuttons %}
-        </form>
+    <div class="col-md-12">
+        <h1>
+            {% if not object %}
+                Nowa notatka
+            {% else %}
+                Edycja notatki
+            {% endif %}
+        </h1>
+        <hr/>
+        <div class="col-md-9">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary pull-right">
+                        {% bootstrap_icon 'save' %} Zapisz
+                    </button>
+                    <button type="reset" class="btn btn-danger">
+                        {% bootstrap_icon "remove" %} Anuluj
+                    </button>
+                {% endbuttons %}
+            </form>
+        </div>
     </div>
 {% endblock %}
