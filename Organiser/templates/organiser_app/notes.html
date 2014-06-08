@@ -3,19 +3,25 @@
 {% block title %}Moje notatki{% endblock %}
 {% block content %}
     <div class="col-md-12">
-        <h1>Moje notatki</h1>
+        <h1>Moje notatki
+            <a href="{% url 'note-new' %}" class="btn btn-primary pull-right">{% bootstrap_icon "plus" %} Dodaj nową</a>
+        </h1>
         <hr/>
-        {% for note in notes %}
-{#            <a href="{% url 'note' note_id=note.id %}" class="list-group-item">#}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>{{ note.title }}</strong>
+        {% for notelist in notes %}
+            <div class="col-md-4">
+                {% for note in notelist %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>{{ note.title }}</strong>
+                            <a href="{% url 'note' note_id=note.id %}"
+                               class="btn btn-primary btn-xs pull-right">{% bootstrap_icon "eye-open" %}</a>
+                        </div>
+                        <div class="panel-body">
+                            {{ note.content|truncatewords:50 }}
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        {{ note.content|truncatewords:50 }}
-                    </div>
-                </div>
-{#            </a>#}
+                {% endfor %}
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

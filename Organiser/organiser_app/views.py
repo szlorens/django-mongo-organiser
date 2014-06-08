@@ -77,7 +77,11 @@ def contact_view(request):
 def notes_view(request):
     user = request.user
     notes = Note.objects.filter(author=user).reverse()
-    return render(request, 'organiser_app/notes.html', {"notes" : notes})
+    notes1 = notes[::3]
+    notes2 = notes[1::3]
+    notes3 = notes[2::3]
+    notes = [notes1, notes2, notes3]
+    return render(request, 'organiser_app/notes.html', {"notes": notes})
 
 
 @login_required()
