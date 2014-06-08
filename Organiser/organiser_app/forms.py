@@ -36,7 +36,11 @@ class CalendarEventForm(forms.ModelForm):
     class Meta:
         model = CalendarEvent
         # fields = ['title', 'description', 'start_date', 'end_date', 'location']
-        start_date = forms.DateField(widget=DateTimePicker(options={"pickTime": True}))
+        #start_date = forms.DateField(widget=DateTimePicker(options={"pickTime": True}))
+        widgets = {
+            'start_date': DateTimePicker(options={"format": "YYYY-MM-DD", "pickTime": True}),
+            'end_date': DateTimePicker(options={"format": "YYYY-MM-DD","pickTime": True})
+        }
         exclude = ['author']
 
 
