@@ -75,7 +75,9 @@ def contact_view(request):
 
 @login_required()
 def notes_view(request):
-    pass
+    user = request.user
+    notes = Note.objects.filter(author=user).reverse()
+    return render(request, 'organiser_app/notes.html', {"notes" : notes})
 
 
 @login_required()
