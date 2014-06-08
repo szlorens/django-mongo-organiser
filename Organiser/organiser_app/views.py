@@ -81,7 +81,7 @@ def notes_view(request):
     notes2 = notes[1::3]
     notes3 = notes[2::3]
     notes = [notes1, notes2, notes3]
-    return render(request, 'organiser_app/notes.html', {"notes": notes})
+    return render(request, 'organiser_app/notes.html', {"notes": notes, "message" : {"type": "info", "content": "Hello!"}})
 
 
 @login_required()
