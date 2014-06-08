@@ -47,7 +47,9 @@ def login_view(request):
 def dashboard_view(request):
     user = request.user
     notes = Note.objects.filter(author=user)[:5].reverse()
-    events = CalendarEvent.objects.filter(Q(start_date__gte=datetime.today()) | Q(start_date__lte=datetime.today() + timedelta(days=7)), author=user).order_by('start_date')[:5]
+    events = CalendarEvent.objects.filter(
+        Q(start_date__gte=datetime.today()) | Q(start_date__lte=datetime.today() + timedelta(days=7)),
+        author=user).order_by('start_date')[:5]
     return render(request, "organiser_app/dashboard.html", {"notes": notes, "events": events})
 
 
@@ -83,7 +85,7 @@ def note_view(request, note_id):
 
     # if action == "delete":
     # note.delete()
-    #     return index(request)
+    # return index(request)
     # else:
     return render(request, "organiser_app/note.html", {"note": note})
 
@@ -140,6 +142,7 @@ class EventMixin(LoginRequiredMixin):
     # form_class = CalendarEventForm
     model = CalendarEvent
     pk_url_kwarg = 'event_id'
+    template_name = 'organiser_app/event_form.html'
 
 
 class ShowEvent(EventMixin, DetailView):
@@ -151,22 +154,26 @@ class ShowEvent(EventMixin, DetailView):
 
 
 class EditEvent(EventMixin, UpdateView):
+    form_class = CalendarEventForm
+    success_url = reverse_lazy('events')
     pass
 
 
 class DeleteEvent(EventMixin, DeleteView):
-
+    template_name = 'organiser_app/event_check_delete.html'
     success_url = reverse_lazy('events')
 
 
 class CreateEvent(EventMixin, CreateView):
     model = CalendarEvent
     form_class = CalendarEventForm
+
     pk_url_kwarg = 'event_id'
 
     def get_initial(self):
         initial = super(CreateEvent, self).get_initial()
         initial['author'] = self.request.user
+        initial['create'] = True
         return initial
 
 

@@ -7,7 +7,9 @@
     <div class="col-md-12">
         <div class="col-md-9">
             <h2>{{ calendarevent.title }}</h2>
-
+            <h3>{{ calendarevent.start_date }}{% if calendarevent.end_date %} do {{ calendarevent.end_date }}{% endif %}</h3>
+            <hr/>
+            {{ calendarevent.location }}
         </div>
         <div class="col-md-3">
             <div class="row top-buffer">

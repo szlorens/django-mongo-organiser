@@ -5,9 +5,9 @@
     <div class="col-md-8 col-md-offset-2">
         <h1 class="text-center">Czy na pewno chcesz usunąć wydarzenie?</h1>
         <hr/>
-        <form action="{% url 'event-delete' event_id=cal %}" method="POST">
+        <form action="{% url 'event-delete' event_id=calendarevent.id %}" method="POST">
             {% csrf_token %}
-            <a href="{% url 'event' event_id=cal %}" class="btn btn-warning">
+            <a href="{% url 'event' event_id=calendarevent.id %}" class="btn btn-warning">
                 {% bootstrap_icon "remove" %} Anuluj</a>
             <button type="submit" class="btn btn-danger pull-right">
                 {% bootstrap_icon "trash" %} Usuń wydarzenie

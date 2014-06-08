@@ -37,11 +37,11 @@ class Contact(models.Model):
 
 
 class CalendarEvent(models.Model):
-    title = models.TextField(max_length=100, verbose_name="Tytuł")
-    description = models.TextField(default=None, null=True, blank=True, verbose_name="Opis")
+    title = models.CharField(max_length=100, verbose_name="Tytuł")
+    description = models.CharField(max_length=500, null=True, blank=True, verbose_name="Opis")
     start_date = models.DateTimeField(verbose_name="Data rozpoczęcia")
     end_date = models.DateTimeField(default=None, null=True, blank=True, verbose_name="Data zakończenia")
-    location = models.TextField(max_length=300, verbose_name="Miejsce wydarzenia", default=None, null=True, blank=True)
+    location = models.CharField(max_length=300, verbose_name="Miejsce wydarzenia", default=None, null=True, blank=True)
     author = models.ForeignKey(User)
 
     def __unicode__(self):
