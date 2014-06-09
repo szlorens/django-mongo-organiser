@@ -1,0 +1,31 @@
+{% extends "organiser_app/base.html" %}
+{% load bootstrap3 %}
+{% block title %}Kontakt{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        {{ form.media }}
+        <h1>
+            {% if not object %}
+                Nowy kontakt
+            {% else %}
+                Edycja kontaktu
+            {% endif %}
+        </h1>
+        <hr/>
+        <div class="col-md-5 col-md-offset-3">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <hr/>
+                    <button type="submit" class="btn btn-primary pull-right">
+                        {% bootstrap_icon 'save' %} Zapisz
+                    </button>
+                    <button type="reset" class="btn btn-danger">
+                        {% bootstrap_icon "remove" %} Anuluj
+                    </button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

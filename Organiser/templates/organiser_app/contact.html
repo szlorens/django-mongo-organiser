@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "organiser_app/base.html" %}
+{% load bootstrap3 %}
+{% block title %}Notatka{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        <h1>Podgląd kontaktu</h1>
+        <hr/>
+        <div class="col-md-9">
+            <h2>{{ contact }}</h2>
+        </div>
+        <div class="col-md-3">
+            <br/>
 
-</body>
-</html>
+            <div class="row top-buffer">
+                <a href="{% url 'contact-edit' contact_id=contact.id %}" class="btn btn-info btn-block">
+                    {% bootstrap_icon "edit" %} Edytuj
+                </a>
+                <a href="{% url 'contact-delete' contact_id=contact.id %}" class="btn btn-danger pull-right btn-block">
+                    {% bootstrap_icon "remove" %} Usuń
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

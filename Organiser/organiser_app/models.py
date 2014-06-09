@@ -27,13 +27,19 @@ class Note(models.Model):
 
 
 class Contact(models.Model):
-    first_name = models.TextField(verbose_name="Imię")
-    last_name = models.TextField(verbose_name="Nazwisko")
+    first_name = models.CharField(verbose_name="Imię", max_length=100)
+    last_name = models.CharField(verbose_name="Nazwisko", max_length=100)
     birthdate = models.DateField(verbose_name="Data urodzenia", null=True, blank=True)
-    phone_number = models.TextField(max_length=12, verbose_name="Numer telefonu")
-    location = models.TextField(max_length=300, verbose_name="Miejsce zamieszkania")
-    additional_info = models.TextField(max_length=500, verbose_name="Dodatkowe informacje")
+    phone_number = models.CharField(max_length=12, verbose_name="Numer telefonu", null=True, blank=True)
+    location = models.CharField(max_length=300, verbose_name="Miejsce zamieszkania", null=True, blank=True)
+    additional_info = models.TextField(max_length=500, verbose_name="Dodatkowe informacje", null=True, blank=True)
     author = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return self.first_name + " " + self.last_name
+
+    def first_letter(self):
+        return self.last_name and self.last_name[0] or ''
 
 
 class CalendarEvent(models.Model):

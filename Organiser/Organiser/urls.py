@@ -18,8 +18,12 @@ urlpatterns = patterns('',
     url(r'^events/new$', views.CreateEvent.as_view(), name='event-new'),
     url(r'^events/$', views.event_view, name='events'),
 
-    url(r'^contacts$', views.contacts_view, name='contacts'),
+    url(r'^contacts/$', views.contacts_view, name='contacts'),
     url(r'^contact/(?P<contact_id>[^/]+)$', views.contact_view, name='contact'),
+    url(r'^contact/(?P<contact_id>[^/]+)/edit$', views.EditContact.as_view(), name='contact-edit'),
+    url(r'^contact/(?P<contact_id>[^/]+)/delete$', views.DeleteContact.as_view(), name='contact-delete'),
+    url(r'^contacts/new$', views.CreateContact.as_view(), name='contact-new'),
+
 
     # Notes
     url(r'^notes$', views.notes_view, name='notes'),

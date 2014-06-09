@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import HiddenInput
-from organiser_app.models import Note, CalendarEvent
+from organiser_app.models import Note, CalendarEvent, Contact
 
 __author__ = 'pawelszymanski'
 
@@ -29,14 +29,18 @@ class NoteForm(forms.ModelForm):
         }
 
 
-class CalendarEventForm(forms.ModelForm):
-    # start_date = forms.DateField(widget=DateTimePicker(options={"pickTime": True}))
-    #end_date = forms.DateField(widget=DateTimePicker(options={"format": "YYYY-MM-DD", "pickTime": True}), required=False)
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        widgets = {
+            'author': HiddenInput()
+        }
+        exclude = ['author']
 
+
+class CalendarEventForm(forms.ModelForm):
     class Meta:
         model = CalendarEvent
-        # fields = ['title', 'description', 'start_date', 'end_date', 'location']
-        #start_date = forms.DateField(widget=DateTimePicker(options={"pickTime": True}))
         widgets = {
             'start_date': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickTime": True}),
             'end_date': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickTime": True})

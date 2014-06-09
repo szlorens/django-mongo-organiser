@@ -1,0 +1,20 @@
+{% extends "organiser_app/base.html" %}
+{% load bootstrap3 %}
+{% block title %}Usuwanie kontaktu{% endblock %}
+{% block content %}
+    <div class="col-md-8 col-md-offset-2">
+        <h1 class="text-center">Czy na pewno chcesz usunąć ten kontakt?</h1>
+        <hr/>
+        <form action="{% url 'contact-delete' contact_id=contact.id %}" method="POST">
+            {% csrf_token %}
+            <a href="{% url 'contact' contact_id=contact.id %}" class="btn btn-warning">
+                {% bootstrap_icon "remove" %} Anuluj</a>
+            <button type="submit" class="btn btn-danger pull-right">
+                {% bootstrap_icon "trash" %} Usuń kontakt
+            </button>
+        </form>
+    </div>
+
+{% endblock %}
+
+

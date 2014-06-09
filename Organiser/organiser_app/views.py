@@ -11,9 +11,10 @@ from django.utils.datetime_safe import datetime
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
-from organiser_app.forms import ProfileForm, NoteForm, RegisterForm, CalendarEventForm
-from organiser_app.models import Note, CalendarEvent
+from itertools import groupby
+from operator import itemgetter
+from organiser_app.forms import ProfileForm, NoteForm, RegisterForm, CalendarEventForm, ContactForm
+from organiser_app.models import Note, CalendarEvent, Contact
 
 
 def index(request):
@@ -65,12 +66,18 @@ def event_view(request):
 
 @login_required()
 def contacts_view(request):
-    pass
+    user = request.user
+    contacts = Contact.objects.filter(author=user).order_by('last_name')
+    # nc = {}
+    # for letter, last_names in groupby(sorted(contacts), key=itemgetter(0)):
+    #     nc[letter] = last_names
+    return render(request, 'organiser_app/contacts.html',{"contacts" : contacts})
 
 
 @login_required()
-def contact_view(request):
-    pass
+def contact_view(request, contact_id):
+    contact = Contact.objects.get(id=contact_id)
+    return render(request, "organiser_app/contact.html", {"contact": contact})
 
 
 @login_required()
@@ -162,7 +169,6 @@ class ShowEvent(EventMixin, DetailView):
 class EditEvent(EventMixin, UpdateView):
     form_class = CalendarEventForm
     success_url = reverse_lazy('events')
-    pass
 
 
 class DeleteEvent(EventMixin, DeleteView):
@@ -173,14 +179,36 @@ class DeleteEvent(EventMixin, DeleteView):
 class CreateEvent(EventMixin, CreateView):
     model = CalendarEvent
     form_class = CalendarEventForm
-
     pk_url_kwarg = 'event_id'
 
     def get_initial(self):
         initial = super(CreateEvent, self).get_initial()
         initial['author'] = self.request.user
-        initial['create'] = True
         return initial
+
+
+# Contacts classes
+class ContactMixin(LoginRequiredMixin):
+    model = Contact
+    pk_url_kwarg = 'contact_id'
+    template_name = 'organiser_app/contact_form.html'
+
+
+class CreateContact(ContactMixin, CreateView):
+    def get_initial(self):
+        initial = super(CreateContact, self).get_initial()
+        initial['author'] = self.request.user
+        return initial
+
+
+class EditContact(ContactMixin, UpdateView):
+    form_class = ContactForm
+    success_url = reverse_lazy('contacts')
+
+
+class DeleteContact(ContactMixin, DeleteView):
+    template_name = 'organiser_app/contact_check_delete.html'
+    success_url = reverse_lazy('contacts')
 
 
 class NoteList(LoginRequiredMixin, ListView):
