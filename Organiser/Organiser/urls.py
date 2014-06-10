@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^register$', views.RegisterView.as_view(),  name='register'),
     url(r'^login$', views.login_view, name='login'),
-    url(r'^calendar$', views.calendar_view, name='calendar'),
+    url(r'^calendar$', views.CalendarView.as_view(), name='calendar'),
 
     # Events
     url(r'^event/(?P<event_id>[^/]+)$', views.ShowEvent.as_view(), name='event'),

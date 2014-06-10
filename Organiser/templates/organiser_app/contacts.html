@@ -16,7 +16,7 @@
         <hr/>
         {% regroup contacts by first_letter as contacts_gr %}
         {% for letter in contacts_gr %}
-            <h3>{{ letter.grouper }}</h3>
+            <h3>{{ letter.grouper|upper }}</h3>
             <hr/>
             {% for item in letter.list %}
                 <div class="panel panel-default">

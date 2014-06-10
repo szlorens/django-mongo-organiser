@@ -192,6 +192,7 @@ class ContactMixin(LoginRequiredMixin):
     model = Contact
     pk_url_kwarg = 'contact_id'
     template_name = 'organiser_app/contact_form.html'
+    form_class = ContactForm
 
 
 class CreateContact(ContactMixin, CreateView):
@@ -219,8 +220,17 @@ class NoteList(LoginRequiredMixin, ListView):
         return Note.objects.filter(author=self.request.user)
 
 
+class CalendarView(LoginRequiredMixin, ListView):
+    model = CalendarEvent
+    context_object_name = 'events'
+    template_name = 'organiser_app/calendar.html'
 
+    def get_queryset(self):
+        return CalendarEvent.objects.filter(author=self.request.user)
 
-
+    def get_initial(self):
+        initial = super(CalendarView, self).get_initial()
+        initial['author'] = self.request.user
+        return initial
 
 

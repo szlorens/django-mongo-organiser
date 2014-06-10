@@ -41,6 +41,9 @@ class Contact(models.Model):
     def first_letter(self):
         return self.last_name and self.last_name[0] or ''
 
+    def get_absolute_url(self):
+        return reverse_lazy('contact', args=(self.id,))
+
 
 class CalendarEvent(models.Model):
     title = models.CharField(max_length=100, verbose_name="Tytuł")
@@ -58,3 +61,6 @@ class CalendarEvent(models.Model):
             return self.start_date <= datetime.now() and self.end_date >= datetime.now()
         else:
             return False
+
+    def get_absolute_url(self):
+        return reverse_lazy('event', args=(self.id,))

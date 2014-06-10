@@ -33,18 +33,18 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         widgets = {
-            'author': HiddenInput()
+            'author': HiddenInput(),
+            'birthdate': DateTimePicker(options={"format": "YYYY-MM-DD", "pickTime": False}),
         }
-        exclude = ['author']
 
 
 class CalendarEventForm(forms.ModelForm):
     class Meta:
         model = CalendarEvent
         widgets = {
+            'author': HiddenInput(),
             'start_date': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickTime": True}),
             'end_date': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickTime": True})
         }
-        exclude = ['author']
 
 
