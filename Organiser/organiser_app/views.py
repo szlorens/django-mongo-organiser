@@ -225,9 +225,10 @@ class CalendarView(LoginRequiredMixin, ListView):
     context_object_name = 'events'
     template_name = 'organiser_app/calendar.html'
     paginate_by = 10
-    
+
     def get_queryset(self):
-        return CalendarEvent.objects.filter(author=self.request.user)
+        today = datetime.today()
+        return CalendarEvent.objects.filter(author=self.request.user, start_date__gte=today)
 
     def get_initial(self):
         initial = super(CalendarView, self).get_initial()
