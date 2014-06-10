@@ -26,7 +26,11 @@
                         </strong>
                     </div>
                     <div class="panel-body">
+                        {% if event.description %}
                         {{ event.description }}
+                        {% else %}
+                        <small>Brak opisu</small>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

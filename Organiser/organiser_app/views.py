@@ -224,7 +224,8 @@ class CalendarView(LoginRequiredMixin, ListView):
     model = CalendarEvent
     context_object_name = 'events'
     template_name = 'organiser_app/calendar.html'
-
+    paginate_by = 10
+    
     def get_queryset(self):
         return CalendarEvent.objects.filter(author=self.request.user)
 
