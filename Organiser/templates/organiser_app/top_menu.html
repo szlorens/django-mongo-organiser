@@ -23,15 +23,11 @@
                                     class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li role="presentation" class="dropdown-header">{{ user.get_full_name }}</li>
-                                <li><a href="{% url 'my-profile' %}">Mój profil</a></li>
                                 <li class="divider"></li>
                                 <li><a href="{% url 'logout' %}">Wyloguj się</a></li>
                             </ul>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-left navbar-right">
-                        <input type="text" class="form-control col-lg-8" placeholder="Szukaj...">
-                    </form>
                 {% else %}
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">

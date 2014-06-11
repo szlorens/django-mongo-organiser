@@ -7,6 +7,29 @@
         <hr/>
         <div class="col-md-9">
             <h2>{{ contact }}</h2>
+            <hr/>
+            <div class="col-md-12">
+                {% if contact.birthdate %}
+                    <h3>Data urodzenia</h3>
+                    {{ contact.birthdate }}
+                    <hr>
+                {% endif %}
+                {% if contact.phone_number %}
+                    <h3>Numer telefonu</h3>
+                    {{ contact.phone_number }}
+                    <hr>
+                {% endif %}
+                {% if contact.location %}
+                    <h3>Adres zamieszkania</h3>
+                    {{ contact.location }}
+                    <hr>
+                {% endif %}
+                {% if contact.additional_info %}
+                    <h3>Dodatkowe informacje</h3>
+                    {{ contact.additional_info }}
+                    <hr>
+                {% endif %}
+            </div>
         </div>
         <div class="col-md-3">
             <br/>

@@ -1,3 +1,19 @@
 {% extends "organiser_app/base.html" %}
-{% block title %}Strona główna{% endblock %}
-Niezalogowany
+{% load bootstrap3 %}
+{% block title %}Organizer - strona główna{% endblock %}
+{% block content %}
+    <br />
+    <div class="jumbotron">
+        <div class="container">
+
+            <h1>Organizer</h1>
+
+            <h2>Organizuj swoje notatki, kontakty i wydarzenia</h2>
+
+            <p>Autorzy: Paweł Szymański, Piotr Żużel</p>
+
+            <a class="btn btn-primary btn-lg" role="button" href="/register">Zarejestruj się &raquo;</a> <a class="btn btn-primary btn-lg" role="button" href="/login">Zaloguj się &raquo;</a>
+        </div>
+    </div>
+
+{% endblock %}

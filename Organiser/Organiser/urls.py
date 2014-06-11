@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     url(r'^profile', views.MyProfileView, name='my-profile'),
 
 
-    url(r'^logout$',  'django.contrib.auth.views.logout', {'next_page': LOGIN_URL}, name='logout'),
+    url(r'^logout$',  'django.contrib.auth.views.logout', {'next_page': "/"}, name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^bootstrap-calendar/', include('django_bootstrap_calendar.urls')),
