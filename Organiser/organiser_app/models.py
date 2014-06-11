@@ -58,9 +58,12 @@ class CalendarEvent(models.Model):
 
     def isActive(self):
         if self.end_date:
-            return self.start_date <= datetime.now() and self.end_date >= datetime.now()
+            return self.start_date.date() <= datetime.today().date() <= self.end_date
         else:
-            return False
+            if self.start_date.date() == datetime.today().date():
+                return True
+            else:
+                return False
 
     def get_absolute_url(self):
         return reverse_lazy('event', args=(self.id,))

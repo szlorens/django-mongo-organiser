@@ -4,9 +4,10 @@
 
 {% block title %}Kalendarz{% endblock %}
 {% block content %}
-<div class="col-md-12">
+    <div class="col-md-12">
         <h1>Moje wydarzenia
-            <a href="{% url 'event-new' %}" class="btn btn-primary pull-right">{% bootstrap_icon "plus" %} Nowe wydarzenie</a>
+            <a href="{% url 'event-new' %}" class="btn btn-primary pull-right">{% bootstrap_icon "plus" %} Nowe
+                wydarzenie</a>
         </h1>
         {% if message %}
             <div class="alert alert-{{ message.type }} alert-dismissable">
@@ -17,54 +18,58 @@
         <hr/>
         {% regroup events by start_date as dates %}
         {% for date in dates %}
-            <h3>{{ date.grouper|date }}</h3>
-            <hr/>
-            {% for event in date.list %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>{{ event.title }} <a href="{% url 'event' event.id %}" class="btn btn-primary btn-xs pull-right">{% bootstrap_icon "eye-open" %}</a>
-                        </strong>
+            <div class="col-md-12">
+                <h3>{{ date.grouper|date }}</h3>
+                <hr/>
+                {% for event in date.list %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>{{ event.title }} <a href="{% url 'event' event.id %}"
+                                                         class="btn btn-primary btn-xs pull-right">{% bootstrap_icon "eye-open" %}</a>
+                            </strong>
+                        </div>
+                        <div class="panel-body">
+                            {% if event.description %}
+                                {{ event.description }}
+                            {% else %}
+                                <small>Brak opisu</small>
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        {% if event.description %}
-                        {{ event.description }}
-                        {% else %}
-                        <small>Brak opisu</small>
-                        {% endif %}
-                    </div>
-                </div>
-            {% endfor %}
-            </li>
+                {% endfor %}
+                </li>
+            </div>
         {% endfor %}
-    {% if is_paginated %}
-    <div class="row">
-        <ul class="pagination">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}"
-                   class="prev">&lsaquo;&lsaquo;</a></li>
-            {% else %}
-            <li class="disabled prev"><a href="#">&lsaquo;&lsaquo;</a></li>
-            {% endif %}
-            {% for page in page_obj.paginator.page_range %}
-            {% if page %}
-            {% ifequal page page_obj.number %}
-            <li class="current page active"><a href="#">{{ page }}</a></li>
-            {% else %}
-            <li><a href="?page={{ page }}{{ getvars }}{{ hashtag }}" class="page">{{ page }}</a></li>
-            {% endifequal %}
-            {% else %}
-            ...
-            {% endif %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}"
-                   class="next">&rsaquo;&rsaquo;</a></li>
-            {% else %}
-            <li class="disabled next"><a href="#">&rsaquo;&rsaquo;</a></li>
-            {% endif %}
-        </ul>
-    </div>
-    {% endif %}
+        {% if is_paginated %}
+            <div class="row">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}"
+                               class="prev">&lsaquo;&lsaquo;</a></li>
+                    {% else %}
+                        <li class="disabled prev"><a href="#">&lsaquo;&lsaquo;</a></li>
+                    {% endif %}
+                    {% for page in page_obj.paginator.page_range %}
+                        {% if page %}
+                            {% ifequal page page_obj.number %}
+                                <li class="current page active"><a href="#">{{ page }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ page }}{{ getvars }}{{ hashtag }}" class="page">{{ page }}</a>
+                                </li>
+                            {% endifequal %}
+                        {% else %}
+                            ...
+                        {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}"
+                               class="next">&rsaquo;&rsaquo;</a></li>
+                    {% else %}
+                        <li class="disabled next"><a href="#">&rsaquo;&rsaquo;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endif %}
     </div>
 
 {% endblock %}

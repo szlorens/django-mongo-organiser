@@ -6,12 +6,22 @@
         <h1>Podgląd wydarzenia</h1>
         <hr/>
         <div class="col-md-9">
-            <h2>{{ calendarevent.title }}</h2>
+            <h2><strong>{{ calendarevent.title }}</strong></h2>
 
-            <h3>{{ calendarevent.start_date }}{% if calendarevent.end_date %} do
-                {{ calendarevent.end_date }}{% endif %}</h3>
+            <h3>{{ calendarevent.start_date }}{% if calendarevent.end_date %}
+                <small>do</small>         {{ calendarevent.end_date }}{% endif %}</h3>
             <hr/>
-            {{ calendarevent.location }}
+            <div class="col-md-12">
+                {% if calendarevent.location %}
+                    <h3>Miejsce wydarzenia:</h3>
+                    {{ calendarevent.location }}
+                {% endif %}
+                {% if calendarevent.description %}
+                    <hr/>
+                    <h3>Opis wydarzenia:</h3>
+                    {{ calendarevent.description }}
+                {% endif %}
+            </div>
         </div>
         <div class="col-md-3">
             <div class="row top-buffer">

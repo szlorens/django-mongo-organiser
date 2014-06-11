@@ -61,6 +61,7 @@ def calendar_view(request):
 
 @login_required()
 def event_view(request):
+    return render(request, 'organiser_app/event.html')
     pass
 
 
@@ -168,7 +169,7 @@ class ShowEvent(EventMixin, DetailView):
 
 class EditEvent(EventMixin, UpdateView):
     form_class = CalendarEventForm
-    success_url = reverse_lazy('events')
+    #success_url = reverse_lazy('events')
 
 
 class DeleteEvent(EventMixin, DeleteView):
@@ -228,7 +229,7 @@ class CalendarView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         today = datetime.today()
-        return CalendarEvent.objects.filter(author=self.request.user, start_date__gte=today)
+        return CalendarEvent.objects.filter(author=self.request.user, start_date__gte=today).order_by('start_date')
 
     def get_initial(self):
         initial = super(CalendarView, self).get_initial()
