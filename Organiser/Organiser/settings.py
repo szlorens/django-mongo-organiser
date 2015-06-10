@@ -10,7 +10,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-from db_settings import DATABASES, SECRET_KEY
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -26,6 +25,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SECRET_KEY = '^xhgon+*p)+x(q3#povklqlb!9#%m=k_o&cw8#bzd4kkgr5=ss'
 
 # Application definition
 
@@ -112,4 +112,11 @@ LOGGING = {
             # django also has database level logging
         },
     },
+}
+
+DATABASES = {
+    'default' : {
+        'ENGINE' : 'django_mongodb_engine',
+            'NAME' : 'organiser'
+        }
 }

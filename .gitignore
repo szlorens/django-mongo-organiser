@@ -57,4 +57,5 @@ Organiser/Organiser/db_settings.py
 docs/_build/
 
 Organiser/.idea/
+.DS_Store
 
