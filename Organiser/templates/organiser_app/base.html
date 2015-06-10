@@ -6,12 +6,13 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     {% load bootstrap3 %}
     {% load bootstrap_calendar %}
-
+    {% load staticfiles %}
     {% bootstrap_css %}
     {% bootstrap_calendar_css %}
 
     <!--<link rel="stylesheet" href="http://bootswatch.com/cosmo/bootstrap.min.css" />-->
-    <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css"/>
+    <!-- <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="{% static 'bootstrap.css' %}" />
     {% bootstrap_javascript %}
 
     {# TODO add language_code param to those tags and create pl.js file #}
