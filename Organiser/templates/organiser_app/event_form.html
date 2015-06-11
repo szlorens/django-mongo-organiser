@@ -8,7 +8,33 @@
   </style> 
 {% endblock%}
 {% block title %}Notatka{% endblock %}
-{% block content %}
+<!-- {% block custom_js %}
+<script>
+$('#id_start_time').datetimepicker({
+    format: 'mm/dd/yyyy hh:ii',
+    autoclose: true,
+    pickerPosition: "bottom-left",
+    maxView: 3,
+    minuteStep: 1,
+    endDate: new Date()
+}).on("changeDate", function (e) {
+    var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
+    $('#time-start').datetimepicker('setDate', TimeZoned);
+});
+$('#id_start_time').datetimepicker({
+    format: 'mm/dd/yyyy hh:ii',
+    autoclose: true,
+    pickerPosition: "bottom-left",
+    maxView: 3,
+    minuteStep: 1,
+    endDate: new Date()
+}).on("changeDate", function (e) {
+    var TimeZoned = new Date(e.date.setTime(e.date.getTime() + (e.date.getTimezoneOffset() * 60000)));
+    $('#time-start').datetimepicker('setDate', TimeZoned);
+});
+</script>
+{% endblock %}
+ -->{% block content %}
     <div class="col-md-12">
         {{ form.media }}
         <h1>

@@ -43,7 +43,7 @@ class CalendarEventForm(forms.ModelForm):
         model = CalendarEvent
         widgets = {
             'author': HiddenInput(),
-            'start_date': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickTime": True}),
+            'start_date': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickTime": True, }),
             'end_date': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm", "pickTime": True})
         }
 
